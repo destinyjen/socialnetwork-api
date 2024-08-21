@@ -6,6 +6,9 @@
 
  ## installation
 
- * 
+For running locally:
+ * Run npm i to install all packages
+ 
+
 
  ## usage
