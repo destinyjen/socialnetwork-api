@@ -7,6 +7,12 @@ const User = require('./models/User');
 const createThought = async (req, res) => {
     try {
         const thought = await Thought.create(req.body);
+        await User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $push: { thoughts: thought._id } },
+            { new: true }
+        );
+
         res.status(201).json(thought);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -55,6 +61,11 @@ const deleteThought = async (req, res) => {
         if (!thought) {
             return res.status(404).json({ message: 'Thought not found' });
         }
+        await User.findOneAndUpdate(
+            { _id: thought.userId },
+            { $pull: { thoughts: thought._id } },
+            { new: true }
+        );
         res.status(200).json({ message: 'Thought deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
