@@ -1,8 +1,8 @@
-// create mongoose library
-const mongoose = require('mongoose');
+// // create mongoose library
+// const mongoose = require('mongoose');
 
 // create a schema for the reaction model
-const { Schema, model } = mongoose;
+const { Schema, model } = ("mongoose");
 
 // create a schema for the reaction model
 const reactionSchema = new Schema({
@@ -24,11 +24,14 @@ const reactionSchema = new Schema({
         default: Date.now,
         get: (timestamp) => new Date(timestamp).toLocaleString(),
     },
+
 }, {
     toJSON: {
         getters: true,
     },
 });
 
+const Reaction = model("Reaction", reactionSchema);  // This line creates a Mongoose model for the reaction schema.
+
 // create export for the reaction schema
-module.exports = reactionSchema;  // This line exports the reaction schema for use in other files.<|fim_suffix|>// This code defines a Mongoose schema for a reaction model, which is used to represent reactions to thoughts in a social media application.    
+module.exports = Reaction;  // This line exports the reaction schema for use in other files.<|fim_suffix|>// This code defines a Mongoose schema for a reaction model, which is used to represent reactions to thoughts in a social media application.    

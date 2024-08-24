@@ -1,6 +1,6 @@
 // import api root routes
 // create a new route file for the index route
-const express = require('express').Router();
+const router = require('express').Router();
 
 //create api routes
 const apiRoutes = require('./api');

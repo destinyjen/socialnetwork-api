@@ -1,12 +1,35 @@
-// import mongoose library
+// // import mongoose library
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 // create a schema for the thought model
-const { Schema, model } = mongoose;
+const { Schema, model, Types } = require('mongoose');
 
 // create a schema for the reaction model
-const reactionSchema = require('./Reaction');
+const reactionSchema = new Schema({
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
+        type: String,
+        required: true,
+        maxlength: 280,
+    },
+    username: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => new Date(timestamp).toLocaleString(),
+    },
+}, {
+    toJSON: {
+        getters: true,
+    },
+});
 
 // create a schema for the thought model
 const thoughtSchema = new Schema({
