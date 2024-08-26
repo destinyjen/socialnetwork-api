@@ -2,7 +2,7 @@
 // const mongoose = require('mongoose');
 
 // create a schema for the reaction model
-const { Schema, model } = ("mongoose");
+const { Schema, Types, model } = require("mongoose");
 
 // create a schema for the reaction model
 const reactionSchema = new Schema({

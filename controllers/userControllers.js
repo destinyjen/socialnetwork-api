@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
 // Create GET for all users
 const getUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find().populate(['thoughts', 'friends']);
         res.status(200).json(users);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -25,7 +25,7 @@ const getUsers = async (req, res) => {
 // Create GET for single user by ID
 const getSingleUser = async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId).populate(['thoughts', 'friends']);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -65,7 +65,7 @@ const deleteUser = async (req, res) => {
 const addFriend = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId);
-        const friend = await User.findById(req.params.friendId);
+        const friend = await User.findById(req.body.friendId);
         if (!user || !friend) {
             return res.status(404).json({ message: 'User or friend not found' });
         }

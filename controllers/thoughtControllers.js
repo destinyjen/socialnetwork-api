@@ -1,6 +1,5 @@
 // create models for thoughts and users and express server
-const Thought = require('./models/Thought');
-const User = require('./models/User');
+const { Thought, User } = require('../models/');
 
 // export modules for thoughts and users with aysnc and await
 // create thoughts and users with async and await
@@ -8,7 +7,7 @@ const createThought = async (req, res) => {
     try {
         const thought = await Thought.create(req.body);
         await User.findOneAndUpdate(
-            { _id: req.body.userId },
+            { username: req.body.username },
             { $push: { thoughts: thought._id } },
             { new: true }
         );
@@ -94,7 +93,7 @@ const removeReaction = async (req, res) => {
         if (!thought) {
             return res.status(404).json({ message: 'Thought not found' });
         }
-        thought.reactions.pull(req.body.reactionId);
+        thought.reactions.pull(req.params.reactionId);
         await thought.save();
         res.status(200).json(thought);
     } catch (error) {
