@@ -20,5 +20,8 @@
 
  Once the server is started, and the API server running port is listening - feel free to test each route found in the controllers files in insomnia to ensure all users, friends, thoughts and reactions can be seen, updated and removed.
 
+ ## walk-through video
+[![Watch the video](socialnetwork-api.png)](https://drive.google.com/file/d/1ma4Lj4seDmQfTY_OD9Wx5b1rsBVmevOl/view?usp=sharing)
+
 
 
